@@ -8,8 +8,15 @@ export async function getWorkouts(): Promise<Workout[]> {
   return response.json();
 }
 
-export async function getWorkout(id: string | number): Promise<Workout> {
-  const response = await fetch(`${API_URL}/${id}`, { cache: "no-store" });
-  if (!response.ok) throw new Error("Workout not found");
+export async function getWorkout(id: string) {
+  const response = await fetch(
+    `https://api.api-store.workers.dev/api/fitlog/${id}`,
+    {
+      cache: "no-store",
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Workout not found");
+  }
   return response.json();
 }
